@@ -1,46 +1,67 @@
 const classNames = {
-  TODO_ITEM: 'todo-container',
-  TODO_CHECKBOX: 'todo-checkbox',
-  TODO_TEXT: 'todo-text',
-  TODO_DELETE: 'todo-delete',
-}
+  TODO_ITEM: "todo-container",
+  TODO_CHECKBOX: "todo-checkbox",
+  TODO_TEXT: "todo-text",
+  TODO_DELETE: "todo-delete",
+};
 
-const list = document.getElementById('todo-list')
-const itemCountSpan = document.getElementById('item-count')
-const uncheckedCountSpan = document.getElementById('unchecked-count')
+const list = document.getElementById("todo-list");
+const itemCountSpan = document.getElementById("item-count");
+const uncheckedCountSpan = document.getElementById("unchecked-count");
 
 const targetCountHandler = (target) => {
   let targetCount = Number(target.innerHTML);
-  
+
+  const updateTargetCount = (count) => {
+    target.innerHTML = count;
+  };
+
   return {
-    get: () => { return targetCount },
+    get: () => {
+      return targetCount;
+    },
     increment: () => {
-      targetCount ++;
-      target.innerHTML = targetCount;
-    }
+      targetCount++;
+      updateTargetCount(targetCount);
+    },
+    decrement: () => {
+      targetCount--;
+      updateTargetCount(targetCount);
+    },
   };
 };
 
 const addTodo = () => {
   targetCountHandler(itemCountSpan).increment();
+  targetCountHandler(uncheckedCountSpan).increment();
   const node = newTodoNode(itemCountSpan);
   list.appendChild(node);
 };
 
-const uncheckTodo = (e) => {
-  targetCountHandler(uncheckedCountSpan).increment();
-  const todoToRemove = document.querySelector(`#${e.target.id}`)
-  todoToRemove.remove();
+const handleTodoCheck = (e) => {
+  if (e.target.checked) targetCountHandler(uncheckedCountSpan).decrement();
+  else targetCountHandler(uncheckedCountSpan).increment();
 };
 
 const newTodoNode = (target) => {
   const count = targetCountHandler(target).get();
-  const node = document.createElement('li');
-  const textNode = document.createTextNode(`TODO: ${count}`);
-  node.appendChild(textNode);
-  node.addEventListener('click', uncheckTodo);
-  node.setAttribute('id', `todo${count}`);
-  
-  return node;
+  const li = document.createElement("li");
+
+  const input = newInputCheckbox("checkbox");
+  input.addEventListener("click", handleTodoCheck);
+
+  const todoDescription = document.querySelector('#todo-description');
+  li.appendChild(document.createTextNode(`${todoDescription.value}`));
+  li.appendChild(input);
+
+  todoDescription.value = "";
+
+  return li;
 };
 
+const newInputCheckbox = (type, text) => {
+  const input = document.createElement("input");
+  input.type = type;
+
+  return input;
+};

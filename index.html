@@ -11,7 +11,11 @@
         <span>Item count: <span id="item-count">0</span></span>
         <span>Unchecked count: <span id="unchecked-count">0</span></span>
       </div>
-      <button class="button center" onClick="addTodo()">Agregar Tarea</button>
+      <div class="create-todo">
+        <input type="text" id="todo-description" placeholder="Escribe la descripcón de la tarea">
+        <br>
+        <button id="submit-create-todo" onClick="addTodo()">Agregar Tarea</button>
+      </div>
       <ul id="todo-list" class="todo-list"></ul>
     </div>
     <script src="./script.js"></script>

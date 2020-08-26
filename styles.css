@@ -46,6 +46,23 @@ ul {
   margin-top: 20px;
   padding: 20px;
   overflow-y: auto;
+  text-align: center;
+}
+
+.create-todo{
+  padding: 40px;
+  width: 50%;
+  margin: auto;
+}
+
+#todo-description{
+  margin: 10px 10px 3px;
+  width: 200px;
+}
+
+#submit-create-todo{
+  width: 200px;
+  margin: 10px;
 }
 
 .todo-delete {
