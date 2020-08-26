@@ -59,7 +59,7 @@ const newTodoNode = (target) => {
   return li;
 };
 
-const newInputCheckbox = (type, text) => {
+const newInputCheckbox = (type) => {
   const input = document.createElement("input");
   input.type = type;
 
