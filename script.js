@@ -5,9 +5,17 @@ const classNames = {
   TODO_DELETE: "todo-delete",
 };
 
-const list = document.getElementById("todo-list");
-const itemCountSpan = document.getElementById("item-count");
-const uncheckedCountSpan = document.getElementById("unchecked-count");
+const ids = {
+  TODO_LIST: "todo-list",
+  ITEM_COUNT: "item-count",
+  UNCHECKED_COUNT: "unchecked-count",
+  TODO_DESCRIPTION: "todo-description"
+
+}
+
+const list = document.getElementById(ids.TODO_LIST);
+const itemCountSpan = document.getElementById(ids.ITEM_COUNT);
+const uncheckedCountSpan = document.getElementById(ids.UNCHECKED_COUNT);
 
 const targetCountHandler = (target) => {
   let targetCount = Number(target.innerHTML);
@@ -50,7 +58,7 @@ const newTodoNode = (target) => {
   const input = newInputCheckbox("checkbox");
   input.addEventListener("click", handleTodoCheck);
 
-  const todoDescription = document.querySelector('#todo-description');
+  const todoDescription = document.getElementById(ids.TODO_DESCRIPTION);
   li.appendChild(document.createTextNode(`${todoDescription.value}`));
   li.appendChild(input);
 
